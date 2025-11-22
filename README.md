@@ -1,11 +1,10 @@
-# Advent of Code 2024
+# Advent of Code 2025
 
-I'm using PHP for most of my problems and trying to optimize the solutions as much as I can.
+One more year of PHP...I should learn some Python. 
 
 ## Tools
-- PHP 8.4
+- PHP 8.5
 - Pest for unit testing
-- PHPBench for benchmarking
 
 ## Rules
 
