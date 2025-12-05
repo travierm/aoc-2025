@@ -7,7 +7,13 @@ require_once("vendor/autoload.php");
 $log = getLogger();
 
 $dayFolderInt = (int) $argv[1];
+$partInt = (int) $argv[2];
+
 $mainFile = sprintf('src/day_%s/day_%s.php', $dayFolderInt, $dayFolderInt);
+if((int) $partInt > 0) {
+    $mainFile = sprintf('src/day_%s/day_%s_part_%s.php', $dayFolderInt, $dayFolderInt, $partInt);
+}
+
 
 if (!file_exists($mainFile)) {
     $log->error(sprintf("Could not find main file for day %s. You need to create a file at src/day_%s/main.php", $dayFolderInt, $dayFolderInt));

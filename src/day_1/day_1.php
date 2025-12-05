@@ -15,6 +15,7 @@ class ProblemState
     public Collection $rotations;
     public int $currentPointer = 50;
     public int $timesOnZero = 0;
+    public int $timesPassedZero =0;
 
     public function __construct() {
         $this->rotations = collect();
@@ -51,23 +52,31 @@ foreach($state->rotations as $rotationRaw)
         $state->currentPointer -= $amount;
     }
 
+    $canNotPassZero = $state->currentPointer === 0;
+
     while($state->currentPointer > 99 || $state->currentPointer < 0) {
         $pointerValue = $state->currentPointer;
 
         if ($state->currentPointer > 99) {
-            $pointerValue = $pointerValue - 99;
-
-            $state->currentPointer = $pointerValue;
+            $pointerValue = $pointerValue - 100;
         }else{
             $pointerValue = 99 - abs($pointerValue + 1);
-
-            $state->currentPointer = $pointerValue;
         }
+
+        $state->currentPointer = $pointerValue;
+
+        if($state->currentPointer !== 0) {
+            $state->timesPassedZero++;
+        }
+
+        $canNotPassZero = false;
     }
 
-
-    dump($state->currentPointer);
+    $log->debug('rotated to ' . $state->currentPointer, [$state->timesPassedZero]);
     $state->middleware($state->currentPointer, $direction, $amount);
 }
 
-dd($state->timesOnZero);
+
+$log->info('timesOnZero: '.$state->timesOnZero);
+$log->info('timesPassedZero: '.$state->timesPassedZero);
+$log->info('combined: '.$state->timesPassedZero + $state->timesOnZero);
