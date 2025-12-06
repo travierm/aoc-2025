@@ -45,7 +45,7 @@ usort($ranges, function ($a, $b) {
 
 
 // start compacting the ranges where the beginning range attempts take over the next ranges entirely or by stealing their end number
-// if a range can not compact further its stored in $compacted and next ranges begins compacting
+// if a range can not compact further its stored in $compacted and the next range begins compacting
 $compacted = [];
 while (count($ranges)) {
     $currentRange = array_shift($ranges);
