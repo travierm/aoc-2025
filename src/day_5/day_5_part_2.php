@@ -29,6 +29,7 @@ function getRangeInts(string $range)
     return [(int)$start, (int)$end];
 }
 
+// sort the ranges
 usort($ranges, function ($a, $b) {
     list($startA, $endA) = explode('-', $a);
     list($startB, $endB) = explode('-', $b);
@@ -43,10 +44,9 @@ usort($ranges, function ($a, $b) {
 });
 
 
+// start compacting the ranges where the beginning range attempts take over the next ranges entirely or by stealing their end number
+// if a range can not compact further its stored in $compacted and next ranges begins compacting
 $compacted = [];
-
-$rangesCopy = $ranges;
-
 while (count($ranges)) {
     $currentRange = array_shift($ranges);
     $currentRangeInts = getRangeInts($currentRange);
@@ -77,6 +77,7 @@ while (count($ranges)) {
     $compacted[] = $rangeStart . '-' . $rangeEnd;
 }
 
+// calculate unique numbers in each range
 $count = 0;
 foreach ($compacted as $compactRange) {
     $rangeSplit = getRangeInts($compactRange);
