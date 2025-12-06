@@ -64,7 +64,7 @@ while (count($ranges)) {
         if ($rangeEnd >= $nextRangeInts[0]) {
             // remove the next range since we're compacting it
             array_shift($ranges);
-            $rangeEnd = $nextRangeInts[1];
+            $rangeEnd = max($rangeEnd, $nextRangeInts[1]);
 
             $log->info($currentRange . ' can compact ' . $nextRange);
         } else {
@@ -88,5 +88,5 @@ foreach ($compacted as $compactRange) {
     }
 }
 
-dump($count);
+dd($count);
 
