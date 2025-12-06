@@ -7,7 +7,6 @@ $inputFile = 'src/day_5/input.txt';
 
 $log = getLogger();
 
-
 $file = new SplFileObject($inputFile, "r");
 $file->setFlags(SplFileObject::READ_CSV | SplFileObject::DROP_NEW_LINE | SplFileObject::SKIP_EMPTY);
 
@@ -77,9 +76,6 @@ while (count($ranges)) {
 
     $compacted[] = $rangeStart . '-' . $rangeEnd;
 }
-
-dd($compacted);
-
 
 $count = 0;
 foreach ($compacted as $compactRange) {
